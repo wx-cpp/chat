@@ -5,16 +5,16 @@
 #include <climits>
 
 std::string generate_unique_string() {
-	// ´´½¨UUID¶ÔÏó
+	// åˆ›å»ºUUIDå¯¹è±¡
 	boost::uuids::uuid uuid = boost::uuids::random_generator()();
 
-	// ½«UUID×ª»»Îª×Ö·û´®
+	// å°†UUIDè½¬æ¢ä¸ºå­—ç¬¦ä¸²
 	std::string unique_string = to_string(uuid);
 
 	return unique_string;
 }
 
-Status StatusServiceImpl::GetChatServer(ServerContext* context, const GetChatServerReq* request, GetChatServerRsp* reply)//µÇÂ¼Ê±Íø¹ØÍ¨¹ırpcµ÷ÓÃº¯Êı
+Status StatusServiceImpl::GetChatServer(ServerContext* context, const GetChatServerReq* request, GetChatServerRsp* reply)//ç™»å½•æ—¶ç½‘å…³é€šè¿‡rpcè°ƒç”¨å‡½æ•°
 {
 	std::string prefix("wx status server has received :  ");
 	const auto& server = getChatServer();
@@ -57,10 +57,10 @@ StatusServiceImpl::StatusServiceImpl()
 
 ChatServer StatusServiceImpl::getChatServer() {
 	std::lock_guard<std::mutex> guard(_server_mtx);
-	auto minServer = _servers.begin()->second; //½á¹¹Ìå±£´æ
+	auto minServer = _servers.begin()->second; //ç»“æ„ä½“ä¿å­˜
 	auto count_str = RedisMgr::GetInstance()->HGet(LOGIN_COUNT, minServer.name);
 	if (count_str.empty()) {
-		//²»´æÔÚÔòÄ¬ÈÏÉèÖÃÎª×î´ó
+		//ä¸å­˜åœ¨åˆ™é»˜è®¤è®¾ç½®ä¸ºæœ€å¤§
 		minServer.con_count = INT_MAX;
 	}
 	else {
@@ -68,7 +68,7 @@ ChatServer StatusServiceImpl::getChatServer() {
 	}
 
 
-	// Ê¹ÓÃ·¶Î§»ùÓÚforÑ­»·
+	// ä½¿ç”¨èŒƒå›´åŸºäºforå¾ªç¯
 	for (auto& server : _servers) {
 
 		if (server.second.name == minServer.name) {
