@@ -20,7 +20,7 @@ ConfigMgr::ConfigMgr() {
 		sectionInfo._section_datas = section_config;
 		_config_map[section_name] = sectionInfo;
 	}
-	// 输出所有的section和key-value对  
+	// 脢盲鲁枚脣霉脫脨碌脛section潞脥key-value露脭  
 	for (const auto& section_entry : _config_map) {
 		const std::string& section_name = section_entry.first;
 		SectionInfo section_config = section_entry.second;
