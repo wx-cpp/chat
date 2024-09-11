@@ -67,11 +67,11 @@ bool RedisMgr::Set(const std::string& key, const std::string& value) {
     if (connect == nullptr) {
         return false;
     }
-    //Ö´ÐÐredisÃüÁîÐÐ
+    //æ‰§è¡Œrediså‘½ä»¤è¡Œ
 
     auto reply = (redisReply*)redisCommand(connect, "SET %s %s", key.c_str(), value.c_str());
 
-    //Èç¹û·µ»ØNULLÔòËµÃ÷Ö´ÐÐÊ§°Ü
+    //å¦‚æžœè¿”å›žNULLåˆ™è¯´æ˜Žæ‰§è¡Œå¤±è´¥
     if (NULL == reply)
     {
         std::cout << "Execut command [ SET " << key << "  " << value << " ] failure ! " << std::endl;
@@ -80,7 +80,7 @@ bool RedisMgr::Set(const std::string& key, const std::string& value) {
         return false;
     }
 
-    //Èç¹ûÖ´ÐÐÊ§°ÜÔòÊÍ·ÅÁ¬½Ó
+    //å¦‚æžœæ‰§è¡Œå¤±è´¥åˆ™é‡Šæ”¾è¿žæŽ¥
     if (!(reply->type == REDIS_REPLY_STATUS && (strcmp(reply->str, "OK") == 0 || strcmp(reply->str, "ok") == 0)))
     {
         std::cout << "Execut command [ SET " << key << "  " << value << " ] failure ! " << std::endl;
@@ -89,7 +89,7 @@ bool RedisMgr::Set(const std::string& key, const std::string& value) {
         return false;
     }
 
-    //Ö´ÐÐ³É¹¦ ÊÍ·ÅredisCommandÖ´ÐÐºó·µ»ØµÄredisReplyËùÕ¼ÓÃµÄÄÚ´æ
+    //æ‰§è¡ŒæˆåŠŸ é‡Šæ”¾redisCommandæ‰§è¡ŒåŽè¿”å›žçš„redisReplyæ‰€å ç”¨çš„å†…å­˜
     freeReplyObject(reply);
     std::cout << "Execut command [ SET " << key << "  " << value << " ] success ! " << std::endl;
     _con_pool->returnConnection(connect);
@@ -104,15 +104,15 @@ bool RedisMgr::Auth(const std::string& password)
     }
     auto reply = (redisReply*)redisCommand(connect, "AUTH %s", password.c_str());
     if (reply->type == REDIS_REPLY_ERROR) {
-        std::cout << "ÈÏÖ¤Ê§°Ü" << std::endl;
-        //Ö´ÐÐ³É¹¦ ÊÍ·ÅredisCommandÖ´ÐÐºó·µ»ØµÄredisReplyËùÕ¼ÓÃµÄÄÚ´æ
+        std::cout << "è®¤è¯å¤±è´¥" << std::endl;
+        //æ‰§è¡ŒæˆåŠŸ é‡Šæ”¾redisCommandæ‰§è¡ŒåŽè¿”å›žçš„redisReplyæ‰€å ç”¨çš„å†…å­˜
         freeReplyObject(reply);
         return false;
     }
     else {
-        //Ö´ÐÐ³É¹¦ ÊÍ·ÅredisCommandÖ´ÐÐºó·µ»ØµÄredisReplyËùÕ¼ÓÃµÄÄÚ´æ
+        //æ‰§è¡ŒæˆåŠŸ é‡Šæ”¾redisCommandæ‰§è¡ŒåŽè¿”å›žçš„redisReplyæ‰€å ç”¨çš„å†…å­˜
         freeReplyObject(reply);
-        std::cout << "ÈÏÖ¤³É¹¦" << std::endl;
+        std::cout << "è®¤è¯æˆåŠŸ" << std::endl;
         return true;
     }
 }
