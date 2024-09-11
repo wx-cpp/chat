@@ -32,27 +32,27 @@ using tcp = boost::asio::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
 
 enum ErrorCodes {
 	Success = 0,
-	Error_Json=1001,//Json½âÎö´íÎó
-	RPCFailed=1002,//PRCÇëÇó´íÎó
-	VarifyExpired=1003,//ÑéÖ¤Âë¹ıÆÚ
-	VarifyCodeErr=1004,//ÑéÖ¤Âë´íÎó
-	UserExist=1005,//ÓÃ»§ÒÑ´æÔÚ
-	PasswdErr=1006,//ÃÜÂë´íÎó
-	EmailNotMatch=1007,//ÓÊÏä²»Æ¥Åä
-	PasswdUpFailed=1008,//¸üĞÂÃÜÂëÊ§°Ü
-	PasswdInvalid=1009,  //ÃÜÂë¸üĞÂÊ§°Ü
-	//RPCGetFailed=1010,//»ñÈ¡rpcÇëÇóÊ§°Ü
-	TokenInvalid = 1010,   //TokenÊ§Ğ§
-	UidInvalid = 1011,  //uidÎŞĞ§
+	Error_Json=1001,//Jsonè§£æé”™è¯¯
+	RPCFailed=1002,//PRCè¯·æ±‚é”™è¯¯
+	VarifyExpired=1003,//éªŒè¯ç è¿‡æœŸ
+	VarifyCodeErr=1004,//éªŒè¯ç é”™è¯¯
+	UserExist=1005,//ç”¨æˆ·å·²å­˜åœ¨
+	PasswdErr=1006,//å¯†ç é”™è¯¯
+	EmailNotMatch=1007,//é‚®ç®±ä¸åŒ¹é…
+	PasswdUpFailed=1008,//æ›´æ–°å¯†ç å¤±è´¥
+	PasswdInvalid=1009,  //å¯†ç æ›´æ–°å¤±è´¥
+	//RPCGetFailed=1010,//è·å–rpcè¯·æ±‚å¤±è´¥
+	TokenInvalid = 1010,   //Tokenå¤±æ•ˆ
+	UidInvalid = 1011,  //uidæ— æ•ˆ
 };
 
-//DeferÀà
+//Deferç±»
 class Defer {
 public:
-	//½ÓÊÕÒ»¸ölambda±í´ïÊ½»òÕßº¯ÊıÖ¸Õë
+	//æ¥æ”¶ä¸€ä¸ªlambdaè¡¨è¾¾å¼æˆ–è€…å‡½æ•°æŒ‡é’ˆ
 	Defer(std::function<void()> func):func_(func){}
 
-	//Îö¹¹º¯ÊıÖĞÖ´ĞĞ´«ÈëµÄº¯Êı
+	//ææ„å‡½æ•°ä¸­æ‰§è¡Œä¼ å…¥çš„å‡½æ•°
 	~Defer() {
 		func_();
 	}
