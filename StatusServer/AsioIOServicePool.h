@@ -12,7 +12,7 @@ public:
     ~AsioIOServicePool();
     AsioIOServicePool(const AsioIOServicePool&) = delete;
     AsioIOServicePool& operator=(const AsioIOServicePool&) = delete;
-    // 使用 round-robin 的方式返回一个 io_service
+    // 脢鹿脫脙 round-robin 碌脛路陆脢陆路碌禄脴脪禄赂枚 io_service
     boost::asio::io_context& GetIOService();
     void Stop();
 private:
